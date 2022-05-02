@@ -8,7 +8,7 @@ import { Search_news, appendTobody, _country_news } from "./fetch.js";
 
 let search = (e) => {
   let search_value = document.querySelector("#search_input").value;
-  console.log(search_value);
+ // console.log(search_value);
 
   let x = Search_news(search_value).then((data) => {
     console.log(data);

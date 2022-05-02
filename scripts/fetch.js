@@ -12,7 +12,8 @@ let Search_news = async (search) => {
 let appendTobody = (data, _Container) => {
   _Container.innerHTML = null;
   console.log(data);
-  data.map(({ urlToImage, description, title }) => {
+
+  data.map(({ urlToImage, description, title },elem) => {
     let main = document.createElement("div");
     main.setAttribute("class","main")
     let img = document.createElement("img");
@@ -27,13 +28,10 @@ let appendTobody = (data, _Container) => {
     p.innerHTML = description;
 
     div.append(h4, p);
-    
     main.append(img, div);
-    main.addEventListener("click",function(){
-      console.log("click")
-      show_to_news(data)
-     
-    });
+     main.addEventListener("click",function() {
+    show_to_news(urlToImage,description, title)
+   })
     _Container.append(main);
   });
 };
@@ -50,12 +48,15 @@ let _country_news = async (code)=>{
     console.log(error);
   }
 }
+
+
+
 let newsdata=[];
  //newsdata = JSON.parse(localStorage.getItem("news"));
-let show_to_news=(data)=>{
-  console.log(data);
- // console.log("yes",urlToImage, description, title);
-  newsdata.push(data);
+let show_to_news=(url,desc,title)=>{
+ // console.log("local",url,desc,title);
+  newsdata.push(url,desc,title);
+
   localStorage.setItem("news", JSON.stringify(newsdata));
   window.location.href="./news.html"
 }

@@ -7,17 +7,16 @@ document.querySelector("#navbar").innerHTML = navbar();
 import { Search_news, appendTobody, _country_news } from "./fetch.js";
 //search
 
-let search = (e) => {
+let search = () => {
   let search_value = document.querySelector("#search_input").value;
-  console.log(search_value);
-
-  let x = Search_news(search_value).then((data) => {
-    console.log(data);
-
+  // console.log(search_value);
+  Search_news(search_value).then((data) => {
+    // console.log("yes",data);
+    if (data === "Error" || data === undefined) {
+      return false;
+    }
     let container = document.querySelector("#results");
-   // window.location.href="search.html"
     appendTobody(data.articles, container);
-   // window.location.href="search.html"
   });
 };
 
@@ -32,7 +31,7 @@ function show_category_news() {
   _country_news(this.id).then((data) => {
     let container = document.querySelector("#results");
     appendTobody(data.articles, container);
-    console.log(data)
+    console.log(data);
   });
 }
 
